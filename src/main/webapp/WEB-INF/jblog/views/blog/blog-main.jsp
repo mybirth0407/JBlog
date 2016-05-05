@@ -8,7 +8,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <title>JBlog</title>
-  <Link rel="stylesheet"
+  <link rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
@@ -51,19 +51,13 @@
 
   <div id="navigation">
     <h2>카테고리</h2>
-    <ul>
-      <li><a href="">닥치고 스프링</a></li>
-      <li><a href="">스프링 스터디</a></li>
-      <li><a href="">스프링 프로젝트</a></li>
-      <li><a href="">기타</a></li>
-    </ul>
+    <c:forEach items="${categoryList}" var="categoryVo">
+      <ul>
+        <li><a href="">${categoryVo.categoryName}</a></li>
+      </ul>
+    </c:forEach>
   </div>
-
-  <div id="footer">
-    <p>
-      <strong>Spring 이야기</strong> is powered by JBlog (c)2016
-    </p>
-  </div>
+  <c:import url="/WEB-INF/jblog/views/include/footer.jsp"/>
 </div>
 </body>
 </html>

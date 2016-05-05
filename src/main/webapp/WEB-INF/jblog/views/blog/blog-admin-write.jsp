@@ -8,25 +8,15 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>JBlog</title>
-  <Link rel="stylesheet"
+  <link rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
 <div id="container">
-  <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
+  <c:import url="/WEB-INF/jblog/views/include/blog-header.jsp"/>
   <div id="wrapper">
     <div id="content" class="full-screen">
-      <ul class="admin-menu">
-        <li class="selected"><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-basic">기본설정</a></li>
-        <li><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-category">카테고리</a></li>
-        <li><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-write">글작성</a></li>
-      </ul>
+      <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
       <form action="" method="post">
         <table class="admin-cat-write">
           <tr>
@@ -51,11 +41,7 @@
       </form>
     </div>
   </div>
-  <div id="footer">
-    <p>
-      <strong>Spring 이야기</strong> is powered by JBlog (c)2016
-    </p>
-  </div>
+  <c:import url="/WEB-INF/jblog/views/include/footer.jsp"/>
 </div>
 </body>
 </html>

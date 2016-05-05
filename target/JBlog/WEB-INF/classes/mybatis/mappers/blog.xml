@@ -20,4 +20,14 @@
       where no = #{no};
     ]]>
   </select>
+
+  <select id="selectByUserID" parameterType="string" resultType="blogvo">
+    <![CDATA[
+      select no, user_id as userID, blog_name as blogName, img
+      from blog
+      where user_id = #{id};
+    ]]>
+  </select>
+
+
 </mapper>

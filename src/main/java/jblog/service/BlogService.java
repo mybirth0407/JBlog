@@ -12,7 +12,12 @@ public class BlogService {
 
     public BlogVo add(BlogVo blogVo) {
         Long no = blogDao.insertBlog(blogVo);
-        BlogVo retBlogVo = blogDao.get(no);
+        BlogVo retBlogVo = blogDao.getBlogVoByNo(no);
         return retBlogVo;
+    }
+
+    public BlogVo getByID(String id) {
+        BlogVo blogVo = blogDao.getBlogVoByID(id);
+        return blogVo;
     }
 }

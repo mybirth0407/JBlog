@@ -5,6 +5,8 @@ import jblog.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
     @Autowired
@@ -13,5 +15,9 @@ public class CategoryService {
     public void add(CategoryVo categoryVo) {
         categoryDao.insertCategory(categoryVo);
     }
-
+    
+    public List<CategoryVo> list(String id) {
+        System.out.println("categorylist");
+        return categoryDao.getCategoryListByID(id);
+    }
 }

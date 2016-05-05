@@ -2,7 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div id="header">
-  <h1>Spring 이야기</h1>
+  <h1><a href="${
+  pageContext.request.contextPath}/${
+  authUser.id}/blog-main">${
+  blogVo.blogName}</a></h1>
   <ul>
     <c:choose>
       <c:when test="${empty authUser}">

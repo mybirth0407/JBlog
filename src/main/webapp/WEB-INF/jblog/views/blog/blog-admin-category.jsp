@@ -8,25 +8,15 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>JBlog</title>
-  <Link rel="stylesheet"
+  <link rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/jblog.css">
 </head>
 <body>
 <div id="container">
-  <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
+  <c:import url="/WEB-INF/jblog/views/include/blog-header.jsp"/>
   <div id="wrapper">
     <div id="content" class="full-screen">
-      <ul class="admin-menu">
-        <li class="selected"><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-basic">기본설정</a></li>
-        <li><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-category">카테고리</a></li>
-        <li><a href="${
-              pageContext.request.contextPath}/${
-              authUser.id}/blog-admin-write">글작성</a></li>
-      </ul>
+      <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
       <table class="admin-cat">
         <tr>
           <th>번호</th>
@@ -35,33 +25,19 @@
           <th>설명</th>
           <th>삭제</th>
         </tr>
-        <tr>
-          <td>3</td>
-          <td>미분류</td>
-          <td>10</td>
-          <td>카테고리를 지정하지 않은 경우</td>
-          <td><img
-            src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>스프링 스터디</td>
-          <td>20</td>
-          <td>어쩌구 저쩌구</td>
-          <td><img
-            src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-          </td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>스프링 프로젝트</td>
-          <td>15</td>
-          <td>어쩌구 저쩌구</td>
-          <td><img
-            src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-          </td>
-        </tr>
+        <c:set var="i" value = "0"/>
+        <c:forEach items="${categoryList}" var="categoryVo">
+          <tr>
+            <td>${i = i + 1}</td>
+            <td>${categoryVo.categoryName}</td>
+            <td>${categoryVo.posting}</td>
+            <td>${categoryVo.description}</td>
+            <td><img
+              src="${
+              pageContext.request.contextPath}/assets/images/delete.jpg">
+            </td>
+          </tr>
+        </c:forEach>
       </table>
 
       <h4 class="n-c">새로운 카테고리 추가</h4>
@@ -81,11 +57,7 @@
       </table>
     </div>
   </div>
-  <div id="footer">
-    <p>
-      <strong>Spring 이야기</strong> is powered by JBlog (c)2016
-    </p>
-  </div>
+  <c:import url="/WEB-INF/jblog/views/include/footer.jsp"/>
 </div>
 </body>
 </html>

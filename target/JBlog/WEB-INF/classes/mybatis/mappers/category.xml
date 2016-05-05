@@ -9,4 +9,14 @@
       values(null, #{blogNo}, #{categoryName}, #{description}, #{posting});
     ]]>
   </insert>
+
+  <select id="listByBlogNo" resultType="categoryvo">
+    <![CDATA[
+      select no, blog_no as blogNo, category_name as categoryName,
+        description, posting
+      from category
+      where blog_no = #{blogNo}
+      order by posting desc;
+    ]]>
+  </select>
 </mapper>
