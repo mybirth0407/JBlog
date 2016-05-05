@@ -17,7 +17,6 @@ public class CategoryService {
     }
     
     public List<CategoryVo> list(String id) {
-        System.out.println("categorylist");
         return categoryDao.getCategoryListByID(id);
     }
 }

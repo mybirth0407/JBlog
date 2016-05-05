@@ -36,6 +36,9 @@
   </mvc:annotation-driven>
 
   <mvc:annotation-driven/>
+
+  <mvc:resources mapping="/product-images/**" location="file:/tmp/"/>
+
   <mvc:default-servlet-handler/>
   <context:annotation-config/>
 
@@ -48,6 +51,12 @@
     <property name="prefix" value="/WEB-INF/jblog/views/"/>
     <property name="suffix" value=".jsp"/>
     <property name="order" value="1"/>
+  </bean>
+
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="52428800"/>
+    <property name="defaultEncoding" value="utf-8"/>
   </bean>
 
   <mvc:interceptors>

@@ -1,5 +1,7 @@
 package jblog.vo;
 
+import jblog.config.Config;
+
 public class BlogVo {
     private Long no;
     private String userID;
@@ -12,9 +14,8 @@ public class BlogVo {
 
     public BlogVo(String userID) {
         this.userID = userID;
-        this.blogName = "insert blog name";
-        this.img =
-            "http://www.rwn.co.kr/news/photo/201405/23271_4367_3147.jpg";
+        this.blogName = Config.DEFAULT_BLOGNAME;
+        this.img = Config.DEFAULT_IMG;
     }
 
     public Long getNo() {

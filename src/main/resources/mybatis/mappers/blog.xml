@@ -29,5 +29,11 @@
     ]]>
   </select>
 
-
+  <update id="changeSettings" parameterType="map">
+    <![CDATA[
+      update blog
+      set blog_name = #{blogName}, img = #{img}
+      where user_id = #{id}
+    ]]>
+   	</update>
 </mapper>
