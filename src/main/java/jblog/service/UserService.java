@@ -17,4 +17,11 @@ public class UserService {
         }
         return success;
     }
+
+    public UserVo login(UserVo userVo) {
+        if (userDao.loginUser(userVo) == false) {
+            return null;
+        }
+        return userVo;
+    }
 }

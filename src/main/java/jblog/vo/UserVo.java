@@ -11,6 +11,15 @@ public class UserVo {
     private String passwd;
     private String regDate;
 
+    public UserVo() {
+
+    }
+
+    public UserVo(String id, String passwd) {
+        this.id = id;
+        this.passwd = passwd;
+    }
+
     public String getId() {
         return id;
     }

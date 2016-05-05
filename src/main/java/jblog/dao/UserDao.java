@@ -17,4 +17,12 @@ public class UserDao {
         }
         return success;
     }
+
+    public boolean loginUser(UserVo userVo) {
+        boolean success = true;
+        if (sqlSession.selectOne("user.login", userVo) == null) {
+            success = false;
+        }
+        return success;
+    }
 }

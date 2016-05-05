@@ -1,6 +1,10 @@
 package jblog.controller;
 
+import jblog.service.BlogService;
+import jblog.service.CategoryService;
 import jblog.service.UserService;
+import jblog.vo.BlogVo;
+import jblog.vo.CategoryVo;
 import jblog.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/jblog/user")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private BlogService blogService;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/joinform")
     public String joinform() {
@@ -32,12 +39,37 @@ public class UserController {
             model.addAllAttributes(bindingResult.getModel());
             return "user/join";
         }
-        userService.join(userVo);
-        return "redirect:/jblog/user/joinsuccess";
+
+        if (userService.join(userVo) == false) {
+            return "user/join";
+        }
+
+        BlogVo blogVo = new BlogVo(userVo.getId());
+        System.out.println(blogVo);
+        blogVo = blogService.add(blogVo);
+
+        System.out.println("");
+        System.out.println(blogVo);
+
+        CategoryVo categoryVo = new CategoryVo(blogVo.getNo());
+        System.out.println(categoryVo);
+        categoryService.add(categoryVo);
+
+        return "redirect:/joinsuccess";
     }
 
     @RequestMapping("/joinsuccess")
     public String joinSuccess() {
         return "user/joinsuccess";
+    }
+
+    @RequestMapping("/loginform")
+    public String loginform() {
+        return "user/login";
+    }
+
+    @RequestMapping("/login_fail")
+    public String loginFail() {
+        return "user/login-fail";
     }
 }
