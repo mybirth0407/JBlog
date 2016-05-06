@@ -12,11 +12,19 @@ public class CategoryService {
     @Autowired
     CategoryDao categoryDao;
 
-    public void add(CategoryVo categoryVo) {
-        categoryDao.insertCategory(categoryVo);
+    public CategoryVo add(CategoryVo categoryVo) {
+        return categoryDao.insertCategory(categoryVo);
     }
     
-    public List<CategoryVo> list(String id) {
+    public List<CategoryVo> getListByID(String id) {
         return categoryDao.getCategoryListByID(id);
+    }
+
+    public boolean remove(Long no) {
+        return categoryDao.delete(no);
+    }
+
+    public CategoryVo getByCategoryName(String categoryName) {
+        return categoryDao.getCategoryVoByCategoryName(categoryName);
     }
 }

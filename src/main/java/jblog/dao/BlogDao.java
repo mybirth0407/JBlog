@@ -14,9 +14,9 @@ public class BlogDao {
     @Autowired
     private SqlSession sqlSession;
 
-    public Long insertBlog(BlogVo blogVo) {
+    public BlogVo insertBlog(BlogVo blogVo) {
         sqlSession.insert("blog.add", blogVo);
-        return blogVo.getNo();
+        return blogVo;
     }
 
     public BlogVo getBlogVoByNo(Long no) {
@@ -29,15 +29,16 @@ public class BlogDao {
         return blogVo;
     }
 
-    public void update(String id, String blogName, String img) {
+    public void updateSettings(String id, String blogName, String img) {
         Map<String, Object> map  = new HashMap<String, Object>();
         BlogVo blogVo = getBlogVoByID(id);
         map.put("id", id);
-        if ("".equals(blogName)) {
+        if ("".equals(blogName) || blogName == null) {
             blogName = blogVo.getBlogName();
         }
         map.put("blogName", blogName);
-        if ("".equals(img)) {
+
+        if ("".equals(img) || img == null) {
             img = blogVo.getImg();
         }
         map.put("img", img);

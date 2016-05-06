@@ -45,14 +45,9 @@ public class UserController {
         }
 
         BlogVo blogVo = new BlogVo(userVo.getId());
-        System.out.println(blogVo);
         blogVo = blogService.add(blogVo);
 
-        System.out.println("");
-        System.out.println(blogVo);
-
         CategoryVo categoryVo = new CategoryVo(blogVo.getNo());
-        System.out.println(categoryVo);
         categoryService.add(categoryVo);
 
         return "redirect:/joinsuccess";

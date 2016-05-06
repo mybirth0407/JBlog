@@ -17,15 +17,20 @@
   <div id="wrapper">
     <div id="content" class="full-screen">
       <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
-      <form action="" method="post">
+      <form action="${
+      pageContext.request.contextPath}/${
+      authUser.id}/post-write"
+            method="post">
         <table class="admin-cat-write">
           <tr>
             <td class="t">제목</td>
             <td>
-              <input type="text" size="60" name="title">
-              <select name="category">
-                <option>미분류</option>
-                <option>자바</option>
+              <input type="text" size="60" name="title" value="">
+              <select name="categoryName">
+                <%--<option>선택하세요</option>--%>
+                <c:forEach items="${categoryList}" var="categoryVo">
+                  <option>${categoryVo.categoryName}</option>
+                </c:forEach>
               </select>
             </td>
           </tr>

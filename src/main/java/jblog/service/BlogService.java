@@ -15,14 +15,11 @@ public class BlogService {
     private BlogDao blogDao;
 
     public BlogVo add(BlogVo blogVo) {
-        Long no = blogDao.insertBlog(blogVo);
-        BlogVo retBlogVo = blogDao.getBlogVoByNo(no);
-        return retBlogVo;
+        return blogDao.insertBlog(blogVo);
     }
 
     public BlogVo getByID(String id) {
-        BlogVo blogVo = blogDao.getBlogVoByID(id);
-        return blogVo;
+        return blogDao.getBlogVoByID(id);
     }
 
     public boolean uploadFile(
@@ -68,6 +65,6 @@ public class BlogService {
     }
 
     public void changeSettings(String id, String blogName, String img) {
-        blogDao.update(id, blogName, img);
+        blogDao.updateSettings(id, blogName, img);
     }
 }

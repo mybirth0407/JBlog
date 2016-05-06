@@ -10,13 +10,33 @@
     ]]>
   </insert>
 
-  <select id="listByBlogNo" resultType="categoryvo">
+  <select id="getListByBlogNo"
+          parameterType="long"
+          resultType="categoryvo">
     <![CDATA[
       select no, blog_no as blogNo, category_name as categoryName,
         description, posting
       from category
       where blog_no = #{blogNo}
       order by posting desc;
+    ]]>
+  </select>
+
+  <delete id="deleteByNo" parameterType="map">
+    <![CDATA[
+      delete from category
+      where no = #{no};
+    ]]>
+  </delete>
+
+  <select id="getByCategoryName"
+          parameterType="string"
+          resultType="categoryvo">
+    <![CDATA[
+      select no, blog_no as blogNo, category_name as categoryName,
+        description, posting
+      from category
+      where category_name = #{categoryName};
     ]]>
   </select>
 </mapper>

@@ -1,5 +1,7 @@
 package jblog.vo;
 
+import jblog.config.Config;
+
 public class CategoryVo {
     private Long no;
     private Long blogNo;
@@ -14,8 +16,8 @@ public class CategoryVo {
     public CategoryVo(Long blogNo) {
         this.blogNo = blogNo;
         this.posting = 0L;
-        this.categoryName = "insert category";
-        this.description = "insert catgory description";
+        this.categoryName = Config.DEFAULT_CATEGORYNAME;
+        this.description = Config.DEFAULT_CATEGORY_DESCRIPTION;
     }
 
     public Long getNo() {

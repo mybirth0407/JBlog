@@ -14,7 +14,6 @@ public class AuthLogoutInterceptor extends HandlerInterceptorAdapter {
         Object handler) throws Exception {
 
         String referrer = req.getHeader("referer");
-//        System.out.println(referrer);
 
         HttpSession httpSession = req.getSession();
         if (httpSession != null) {

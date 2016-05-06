@@ -5,13 +5,15 @@
   <h1><a href="${
   pageContext.request.contextPath}/${
   authUser.id}/blog-main">${
-  blogVo.blogName}</a></h1>
+    blogVo.blogName}</a></h1>
   <ul>
     <c:choose>
       <c:when test="${empty authUser}">
         <li><a href="${
           pageContext.request.contextPath}/${
           authUser.id}/login">로그인</a></li>
+        <li><a href="${
+          pageContext.request.contextPath}/joinform">회원가입</a></li>
       </c:when>
       <c:otherwise>
         <li><a href="${
