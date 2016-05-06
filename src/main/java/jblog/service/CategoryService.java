@@ -27,4 +27,8 @@ public class CategoryService {
     public CategoryVo getByCategoryName(String categoryName) {
         return categoryDao.getCategoryVoByCategoryName(categoryName);
     }
+
+    public void updatePosting(Long no) {
+        categoryDao.update(no);
+    }
 }

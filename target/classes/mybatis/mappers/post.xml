@@ -15,22 +15,51 @@
       select no, category_no as categoryNo,
         title, content, reg_date as regDate
       from post
-      where category_no = #{categoryNo}
+      where #{categoryNo} = category_no
       order by reg_date desc;
     ]]>
   </select>
 
-  <select id="post.getByRecentByCategoryNo"
+  <select id="getRecentByCategoryNo"
           parameterType="long"
           resultType="postvo">
     <![CDATA[
       select no, category_no as categoryNo,
         title, content, reg_date as regDate
       from post
-      where category_no = #{categoryNo}
+      where #{categoryNo} = category_no
       order by reg_date desc
       limit 1;
     ]]>
   </select>
 
+  <select id="getRecentByID"
+          parameterType="string"
+          resultType="postvo">
+    <![CDATA[
+      select no, category_no as categoryNo,
+        title, content, reg_date as regDate
+      from post
+      where category_no = (
+        select c.no
+        from category c, blog b
+        where #{id} = b.user_id
+            and b.no = c.blog_no
+        order by c.no desc
+        limit 1)
+      order by reg_date desc
+      limit 1;
+    ]]>
+  </select>
+
+  <select id="getByPostNo"
+          parameterType="long"
+          resultType="postvo">
+    <![CDATA[
+      select no, category_no as categoryNo,
+        title, content, reg_date as regDate
+      from post
+      where #{postNo} = no;
+    ]]>
+  </select>
 </mapper>

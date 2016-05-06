@@ -17,7 +17,7 @@
       select no, blog_no as blogNo, category_name as categoryName,
         description, posting
       from category
-      where blog_no = #{blogNo}
+      where #{blogNo} = blog_no
       order by posting desc;
     ]]>
   </select>
@@ -25,7 +25,7 @@
   <delete id="deleteByNo" parameterType="map">
     <![CDATA[
       delete from category
-      where no = #{no};
+      where #{no} = no;
     ]]>
   </delete>
 
@@ -36,7 +36,16 @@
       select no, blog_no as blogNo, category_name as categoryName,
         description, posting
       from category
-      where category_name = #{categoryName};
+      where #{categoryName} = category_name;
     ]]>
   </select>
+
+  <update id="updatePosting" parameterType="long">
+    <![CDATA[
+      update category
+      set posting = posting + 1
+      where #{no} = no;
+    ]]>
+  </update>
+
 </mapper>

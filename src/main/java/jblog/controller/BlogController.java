@@ -4,6 +4,8 @@ import jblog.config.Config;
 import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.PostService;
+import jblog.vo.CategoryVo;
+import jblog.vo.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,35 +55,48 @@ public class BlogController {
     @RequestMapping("/{id}/blog-main")
     public String blogMain(
         @PathVariable("id") String id,
-        //TODO default value 해당 블로그에 맞게 수정
         @RequestParam(
-            value = "category-no", required = true, defaultValue = "1")
+            value = "category-no", required = true, defaultValue = "")
             Long categoryNo,
         @RequestParam(
-            value = "post-no", required = true, defaultValue = "1")
+            value = "post-no", required = true, defaultValue = "")
             Long postNo,
         Model model) {
-        //        Map<String, Object> map = new HashMap<String, Object>();
-        //        map.put("categoryList", categoryService.getListByID(id));
-        //        map.put("postList", postService.getListByCategoyNo
-        // (categoryNo));
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("categoryList", categoryService.getListByID(id));
+//        map.put("postList", postService.getListByCategoyNo(categoryNo));
+        System.out.println(categoryNo + " " + postNo);
+        PostVo postVo = null;
+        if (("".equals(postNo) || postNo == null) && categoryNo == null) {
+            postVo = postService.getRecent(id);
+            model.addAttribute("postVo", postVo);
+        }
+        else if ("".equals(postNo) || postNo == null) {
+            model.addAttribute("postVo",
+                postService.mainPostByCategoryNo(categoryNo));
+        }
+        else {
+            model.addAttribute("postVo",
+                postService.mainPostByPostNo(postNo));
+        }
+
         if ("".equals(categoryNo) || categoryNo == null) {
+            if (postVo != null) {
+                model.addAttribute("postList",
+                    postService.getListByCategoyNo(postVo.getCategoryNo()));
+            }
+            else {
 
+            }
+        }
+        else {
+            model.addAttribute(
+                "postList", postService.getListByCategoyNo(categoryNo));
         }
 
-        if ("".equals(postNo) || postNo == null) {
-
-        }
         model.addAttribute("blogVo", blogService.getByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
 //        System.out.println(categoryNo + " " + postNo);
-        /* 해당 카테고리에서 가장 최신 글 */
-        model.addAttribute("postVo",
-            postService.mainPostByCategoryNo(categoryNo));
-        //        model.addAttribute("map", map);
-        //        System.out.println(map);
-        model.addAttribute(
-            "postList", postService.getListByCategoyNo(categoryNo));
         return "blog/blog-main";
     }
 

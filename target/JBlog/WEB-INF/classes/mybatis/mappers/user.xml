@@ -15,7 +15,7 @@
       select id, name
       from user
       where id = #{id}
-        and passwd = password(#{passwd});
+        and password(#{passwd}) = passwd;
     ]]>
   </select>
 </mapper>

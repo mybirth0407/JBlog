@@ -24,12 +24,21 @@ public class PostDao {
         return sqlSession.selectList("post.getListByID", id);
     }
 
-    public PostVo getByRecent(Long categoryNo) {
+    public PostVo getRecentByCategoryNo(Long categoryNo) {
+        System.out.println(categoryNo);
         return sqlSession.selectOne(
-            "post.getByRecentByCategoryNo", categoryNo);
+            "post.getRecentByCategoryNo", categoryNo);
     }
 
     public List<PostVo> getCategoryListByCategoryNo(Long categoryNo) {
         return sqlSession.selectList("post.getListByCategoryNo", categoryNo);
+    }
+
+    public PostVo getRecentByID(String id) {
+        return sqlSession.selectOne("post.getRecentByID", id);
+    }
+
+    public PostVo getByPostNo(Long postNo) {
+        return sqlSession.selectOne("post.getByPostNo", postNo);
     }
 }

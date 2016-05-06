@@ -17,7 +17,7 @@
     <![CDATA[
       select no, user_id as userID, blog_name as blogName, img
       from blog
-      where no = #{no};
+      where #{no} = no;
     ]]>
   </select>
 
@@ -25,7 +25,7 @@
     <![CDATA[
       select no, user_id as userID, blog_name as blogName, img
       from blog
-      where user_id = #{id};
+      where #{id} = user_id;
     ]]>
   </select>
 
@@ -33,7 +33,7 @@
     <![CDATA[
       update blog
       set blog_name = #{blogName}, img = #{img}
-      where user_id = #{id}
+      where #{id} = user_id;
     ]]>
    	</update>
 </mapper>

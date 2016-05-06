@@ -43,4 +43,8 @@ public class CategoryDao {
         return sqlSession.selectOne(
             "category.getByCategoryName", categoryName);
     }
+
+    public void update(Long no) {
+        sqlSession.update("category.updatePosting", no);
+    }
 }

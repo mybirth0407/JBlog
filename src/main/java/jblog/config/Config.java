@@ -8,4 +8,6 @@ public class Config {
     public static final String DEFAULT_CATEGORYNAME = "미분류";
     public static final String DEFAULT_CATEGORY_DESCRIPTION =
         "미분류 카테고리다";
+
+    //TODO 권한과 블로그 네임 관련, 현재 auth 유저인 경우만 정상동작 함
 }

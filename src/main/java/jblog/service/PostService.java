@@ -21,10 +21,18 @@ public class PostService {
     }
 
     public PostVo mainPostByCategoryNo(Long categoryNo) {
-        return postDao.getByRecent(categoryNo);
+        return postDao.getRecentByCategoryNo(categoryNo);
     }
 
     public List<PostVo> getListByCategoyNo(Long categoryNo) {
         return postDao.getCategoryListByCategoryNo(categoryNo);
+    }
+    
+    public PostVo getRecent(String id) {
+        return postDao.getRecentByID(id);
+    }
+
+    public PostVo mainPostByPostNo(Long postNo) {
+        return postDao.getByPostNo(postNo);
     }
 }
