@@ -1,3 +1,4 @@
+<%@ page import="jblog.config.Config" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -17,26 +18,36 @@
   <div id="wrapper">
     <div id="content" class="full-screen">
       <c:import url="/WEB-INF/jblog/views/include/blog-admin-header.jsp"/>
-      <form action="" method="post">
+      <form
+        action="${
+        pageContext.request.contextPath}/${authUser.id}/changeSettings"
+        enctype="multipart/form-data"
+        method="post">
         <table class="admin-config">
           <tr>
             <td class="t">블로그 제목</td>
-            <td><input type="text" size="40" name="title"></td>
+            <td><input type="text" size="40" name="blog-name"
+                       placeholder="${blogVo.blogName}"/></td>
           </tr>
           <tr>
             <td class="t">로고이미지</td>
-            <td><img
-              src="${
-              pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+            <td><img src="${blogVo.img}"/>
             </td>
           </tr>
           <tr>
             <td class="t">&nbsp;</td>
-            <td><input type="file" name="logo-file"></td>
+            <td>
+              <%--TODO value 값 변경해서 기본 이미지로 변경하기--%>
+              <button type="file"
+                      name="default-logo-file"
+                      value=${Config.DEFAULT_IMG}>
+                기본 사진으로 변경
+              </button>
+              <input type="file" name="logo-file"/></td>
           </tr>
           <tr>
             <td class="t">&nbsp;</td>
-            <td class="s"><input type="submit" value="기본설정 변경"></td>
+            <td class="s"><input type="submit" value="기본설정 변경"/></td>
           </tr>
         </table>
       </form>

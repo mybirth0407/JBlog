@@ -53,7 +53,7 @@ public class BlogController {
     @RequestMapping("/{id}/blog-main")
     public String blogMain(
         @PathVariable("id") String id,
-        //TODO default value 블로그에 맞게 수정
+        //TODO default value 해당 블로그에 맞게 수정
         @RequestParam(
             value = "category-no", required = true, defaultValue = "1")
             Long categoryNo,
