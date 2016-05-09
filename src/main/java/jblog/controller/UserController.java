@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -66,5 +66,19 @@ public class UserController {
     @RequestMapping("/login_fail")
     public String loginFail() {
         return "user/login-fail";
+    }
+
+    @RequestMapping("/checkID")
+    @ResponseBody
+    public Map<String, Object> checkID(
+        @RequestParam(value = "blog-id", required = true, defaultValue = "")
+        String id) {
+        UserVo userVo = userService.getUserByID(id);
+        System.out.println(userVo);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("result", "success");
+        map.put("data", userVo == null);
+        return map;
     }
 }

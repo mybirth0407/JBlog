@@ -10,7 +10,7 @@
     ]]>
   </insert>
 
-  <select id="getListByBlogNo"
+  <select id="selectListByBlogNo"
           parameterType="long"
           resultType="categoryvo">
     <![CDATA[
@@ -29,7 +29,7 @@
     ]]>
   </delete>
 
-  <select id="getByCategoryName"
+  <select id="selectByCategoryName"
           parameterType="string"
           resultType="categoryvo">
     <![CDATA[
@@ -48,7 +48,7 @@
     ]]>
   </update>
 
-  <select id="getByCategoryNo"
+  <select id="selectByCategoryNo"
           parameterType="long"
           resultType="categoryvo">
     <![CDATA[

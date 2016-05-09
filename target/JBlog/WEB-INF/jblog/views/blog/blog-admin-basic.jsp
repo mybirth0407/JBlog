@@ -26,17 +26,17 @@
         reader.readAsDataURL(input.files[0]);
       }
     }
-    function defaultIMG(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function() {
-          $("#logo-img").attr("src",
-            "http://www.rwn.co.kr/news/photo/201405/23271_4367_3147.jpg");
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
+    /* 기본 이미지 초기화 */
+//    function defaultIMG(input) {
+//      if (input.files && input.files[0]) {
+//        var reader = new FileReader();
+//        reader.onload = function() {
+//          $("#logo-img").attr("src",
+//            "http://www.rwn.co.kr/news/photo/201405/23271_4367_3147.jpg");
+//          }
+//      reader.readAsDataURL(input.files[0]);
+//      }
+//    }
   </script>
 </head>
 <body>
@@ -67,10 +67,11 @@
               <%--<input type="checkbox" name="default-image" value="true"/>--%>
               <a href="${
               pageContext.request.contextPath}/${
-              authUser.id}/changeDefault">기본 설정으로 변경
-                <input type="hidden"
-                       name="logo-file"
-                       onchange="defaultIMG(this);"/>
+              authUser.id}/changeDefault">초기 설정으로 변경
+                <%--TODO 전체 설정 초기화 대신 기본 이미지만 변경하도록 --%>
+                <%--<input type="hidden"--%>
+                       <%--name="logo-file"--%>
+                       <%--onchange="defaultIMG(this);"/>--%>
               </a>
               <input type="file"
                      name="logo-file"

@@ -35,7 +35,7 @@ public class PostController {
         @PathVariable("postNo") Long postNo,
         Model model) {
         model.addAttribute("postVo", postService.getPostByPostNo(postNo));
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         return "blog/blog-admin-writesuccess";
     }
 

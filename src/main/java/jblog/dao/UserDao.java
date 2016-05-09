@@ -25,4 +25,8 @@ public class UserDao {
         }
         return success;
     }
+
+    public UserVo getUserByID(String id) {
+        return sqlSession.selectOne("user.selectByID", id);
+    }
 }

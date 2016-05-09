@@ -40,7 +40,7 @@ public class CategoryController {
         @ModelAttribute CategoryVo categoryVo,
         @PathVariable("id") String id,
         Model model) {
-        BlogVo blogVo = blogService.getBlogVoByID(id);
+        BlogVo blogVo = blogService.getBlogByID(id);
         categoryVo.setBlogNo(blogVo.getNo());
         categoryVo.setPosting(0L);
         model.addAttribute("blogVo", blogVo);

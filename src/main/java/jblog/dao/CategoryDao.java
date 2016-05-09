@@ -25,7 +25,7 @@ public class CategoryDao {
     public List<CategoryVo> getCategoryListByID(String id) {
         BlogVo blogVo = sqlSession.selectOne("blog.selectByUserID", id);
         List<CategoryVo> categoryList = sqlSession.selectList(
-            "category.getListByBlogNo", blogVo.getNo());
+            "category.selectListByBlogNo", blogVo.getNo());
         return categoryList;
     }
     
@@ -40,7 +40,7 @@ public class CategoryDao {
 
     public CategoryVo getCategoryByCategoryName(String categoryName) {
         return sqlSession.selectOne(
-            "category.getByCategoryName", categoryName);
+            "category.selectByCategoryName", categoryName);
     }
 
     public void update(Long categoryNo, Long action) {
@@ -53,6 +53,6 @@ public class CategoryDao {
 
     public CategoryVo getCategoryByCategoryNo(Long categoryNo) {
         return sqlSession.selectOne(
-            "category.getByCategoryNo", categoryNo);
+            "category.selectByCategoryNo", categoryNo);
     }
 }

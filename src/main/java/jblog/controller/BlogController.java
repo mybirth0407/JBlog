@@ -29,7 +29,7 @@ public class BlogController {
     public String blogAdminBasic(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         return "blog/blog-admin-basic";
     }
 
@@ -37,7 +37,7 @@ public class BlogController {
     public String blogAdminCategroy(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
         return "blog/blog-admin-category";
     }
@@ -46,7 +46,7 @@ public class BlogController {
     public String blogAdminWrite(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
         return "blog/blog-admin-write";
     }
@@ -85,7 +85,7 @@ public class BlogController {
             model.addAttribute(
                 "postList", postService.getListByCategoyNo(categoryNo));
         }
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
         return "blog/blog-main";
     }
@@ -100,7 +100,7 @@ public class BlogController {
             Boolean isIMGDefaultTrue,
         Model model) {
         String img = null;
-        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        model.addAttribute("blogVo", blogService.getBlogByID(id));
         if (isIMGDefaultTrue == true) {
             img = Config.DEFAULT_IMG;
         }
