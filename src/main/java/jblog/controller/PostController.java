@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostController {
@@ -25,7 +26,7 @@ public class PostController {
         @ModelAttribute PostVo postVo, @PathVariable("id") String id) {
         postService.write(postVo);
         System.out.println(postVo);
-        categoryService.updatePosting(postVo.getCategoryNo());
+        categoryService.updatePosting(postVo.getCategoryNo(), 1L);
         return "redirect:/" + id + "/writesuccess/" + postVo.getNo();
     }
 
@@ -34,8 +35,22 @@ public class PostController {
         @PathVariable("id") String id,
         @PathVariable("postNo") Long postNo,
         Model model) {
-        model.addAttribute("postVo", postService.getPostByNo(postNo));
+        model.addAttribute("postVo", postService.getPostByPostNo(postNo));
         model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         return "blog/blog-admin-writesuccess";
+    }
+
+
+    @RequestMapping("/{id}/delete")
+    public String postDelete(
+        @PathVariable("id") String id,
+        @RequestParam("category_no") Long categoryNo,
+        @RequestParam("post_no") Long postNo) {
+        if (categoryNo == null) {
+            return "redirect:/" + id + "/blog-main";
+        }
+        postService.deleteByPostNo(postNo);
+        categoryService.updatePosting(categoryNo, -1L);
+        return "redirect:/" + id + "/blog-main?category_no=" + categoryNo;
     }
 }

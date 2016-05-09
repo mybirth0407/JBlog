@@ -29,9 +29,10 @@ public class CategoryDao {
         return categoryList;
     }
     
-    public boolean delete(Long no) {
+    public boolean delete(Long categoryNo) {
         boolean success = true;
-        if (sqlSession.delete("category.deleteByNo", no) == 0) {
+        if (sqlSession.delete(
+            "category.deleteByCategoryNo", categoryNo) == 0) {
             success = false;
         }
         return success;
@@ -42,12 +43,16 @@ public class CategoryDao {
             "category.getByCategoryName", categoryName);
     }
 
-    public void update(Long no) {
-        sqlSession.update("category.updatePosting", no);
+    public void update(Long categoryNo, Long action) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("no", categoryNo);
+        map.put("action", action);
+        System.out.println(action);
+        sqlSession.update("category.updatePosting", map);
     }
 
-    public CategoryVo getCategoryByCategoryNo(Long no) {
+    public CategoryVo getCategoryByCategoryNo(Long categoryNo) {
         return sqlSession.selectOne(
-            "category.getByCategoryNo", no);
+            "category.getByCategoryNo", categoryNo);
     }
 }

@@ -17,9 +17,25 @@
   <div id="wrapper">
     <div id="content">
       <div class="blog-content">
-        <h1>최근 포스트</h1>
-        <h4>${postVo.title}</h4>
+        <c:choose>
+        <c:when test="${
+        param.category_no eq '' || empty param.category_no}">
+        <strong><h1>최근 포스트</h1></strong>
+        <h2>${postVo.title}</h2>
         <p>${postVo.content}<p>
+        </c:when>
+        <c:otherwise>
+        <h1>${postVo.title}</h1>
+        <p>${postVo.content}<p>
+        </c:otherwise>
+        </c:choose>
+        <c:if test="${authUser.id eq blogVo.userID}">
+        <strong><a href="${
+        pageContext.request.contextPath}/${
+        authUser.id}/delete?category_no=${
+        postVo.categoryNo}&post_no=${
+        postVo.no}">글 삭제</a></strong>
+        </c:if>
       </div>
       <ul class="blog-list">
         <c:forEach items="${postList}" var="postVo">
@@ -27,9 +43,9 @@
             <c:set value="${postVo.categoryNo}" var="categoryNo"/>
             <a href="${
             pageContext.request.contextPath}/${
-            blogVo.userID}/blog-main?category-no=${
-            categoryNo}&post-no=${postVo.no}">${
-            postVo.title}</a> <span>${
+            blogVo.userID}/blog-main?category_no=${
+            categoryNo}&post_no=${postVo.no}">${
+              postVo.title}</a> <span>${
             postVo.regDate}</span>
           </li>
         </c:forEach>
@@ -51,8 +67,8 @@
         <li>
           <a href="${
           pageContext.request.contextPath}/${
-          blogVo.userID}/blog-main?category-no=${categoryVo.no}">${
-          categoryVo.categoryName}</a>
+          blogVo.userID}/blog-main?category_no=${categoryVo.no}">${
+            categoryVo.categoryName}</a>
         </li>
       </c:forEach>
     </ul>

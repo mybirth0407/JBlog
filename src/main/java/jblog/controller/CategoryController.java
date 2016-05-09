@@ -19,17 +19,17 @@ public class CategoryController {
     @Autowired
     BlogService blogService;
 
-    @RequestMapping("/category-delete/{no}")
+    @RequestMapping("/category-delete/{categoryNo}")
     @ResponseBody
     public Map<String, Object> categoryDelete(
-        @PathVariable("no") Long no) {
+        @PathVariable("categoryNo") Long categoryNo) {
         Map<String, Object> map = new HashMap<String, Object>();
-        if (categoryService.getByNo(no).getPosting() > 0) {
+        if (categoryService.getByNo(categoryNo).getPosting() > 0) {
             map.put("result", "false");
         }
         else {
             map.put("result", "success");
-            map.put("data", categoryService.remove(no));
+            map.put("data", categoryService.remove(categoryNo));
         }
         return map;
     }

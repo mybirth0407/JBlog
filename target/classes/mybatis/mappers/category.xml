@@ -22,7 +22,7 @@
     ]]>
   </select>
 
-  <delete id="deleteByNo" parameterType="map">
+  <delete id="deleteByCategoryNo" parameterType="long">
     <![CDATA[
       delete from category
       where #{no} = no;
@@ -40,22 +40,22 @@
     ]]>
   </select>
 
-  <update id="updatePosting" parameterType="long">
+  <update id="updatePosting" parameterType="map">
     <![CDATA[
       update category
-      set posting = posting + 1
-      where #{no} = no;
+      set posting = posting + #{action}
+      where #{categoryNo} = no;
     ]]>
   </update>
 
-  <select id="getByCategoryName"
-          parameterType="string"
+  <select id="getByCategoryNo"
+          parameterType="long"
           resultType="categoryvo">
     <![CDATA[
       select no, blog_no as blogNo, category_name as categoryName,
         description, posting
       from category
-      where #{no} = no;
+      where #{categoryNo} = no;
     ]]>
   </select>
 </mapper>

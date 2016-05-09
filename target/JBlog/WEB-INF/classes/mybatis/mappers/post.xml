@@ -37,18 +37,14 @@
           parameterType="string"
           resultType="postvo">
     <![CDATA[
-      select no, category_no as categoryNo,
-        title, content, reg_date as regDate
-      from post
-      where category_no = (
-        select c.no
-        from category c, blog b
-        where #{id} = b.user_id
-            and b.no = c.blog_no
-        order by c.no desc
-        limit 1)
-      order by reg_date desc
-      limit 1;
+      select p.no, p.category_no as categoryNo,
+        p.title, p.content, p.reg_date as regDate
+      from post p, user u, blog b, category c
+      where #{id} = b.user_id
+          and b.no = c.blog_no
+          and c.no = p.category_no
+      order by c.no desc
+      limit 1
     ]]>
   </select>
 
@@ -60,6 +56,14 @@
         title, content, reg_date as regDate
       from post
       where #{postNo} = no;
+    ]]>
+  </select>
+
+  <select id="deleteByPostNo"
+          parameterType="long">
+    <![CDATA[
+      delete from post
+      where no = #{postNo};
     ]]>
   </select>
 </mapper>

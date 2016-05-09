@@ -39,4 +39,8 @@ public class PostDao {
     public PostVo getByPostNo(Long postNo) {
         return sqlSession.selectOne("post.getByPostNo", postNo);
     }
+
+    public void deletePostByPostNo(Long postNo) {
+        sqlSession.delete("post.deleteByPostNo", postNo);
+    }
 }

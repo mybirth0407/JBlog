@@ -20,19 +20,19 @@ public class CategoryService {
         return categoryDao.getCategoryListByID(id);
     }
 
-    public boolean remove(Long no) {
-        return categoryDao.delete(no);
+    public boolean remove(Long categoryNo) {
+        return categoryDao.delete(categoryNo);
     }
 
     public CategoryVo getByCategoryName(String categoryName) {
         return categoryDao.getCategoryByCategoryName(categoryName);
     }
 
-    public void updatePosting(Long no) {
-        categoryDao.update(no);
+    public void updatePosting(Long categoryNo, Long action) {
+        categoryDao.update(categoryNo, action);
     }
 
-    public CategoryVo getByNo(Long no) {
-        return categoryDao.getCategoryByCategoryNo(no);
+    public CategoryVo getByNo(Long categoryNo) {
+        return categoryDao.getCategoryByCategoryNo(categoryNo);
     }
 }

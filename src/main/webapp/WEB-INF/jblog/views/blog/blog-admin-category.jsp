@@ -12,16 +12,6 @@
   <title>JBlog</title>
   <link rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/jblog.css">
-  <%--<script type="text/javascript"--%>
-  <%--src="/assets/js/jquery/jquery-1.9.0.js"></script>--%>
-  <%--<script type="text/javascript">--%>
-  <%--var dialogDelete = null;--%>
-  <%--$(document).on("click", ".a-del", function(event) {--%>
-  <%--event.preventDefault();--%>
-  <%--var no = $(this).attr("category-no");--%>
-  <%--${}--%>
-  <%--})--%>
-  <%--</script>--%>
 </head>
 <body>
 <div id="container">

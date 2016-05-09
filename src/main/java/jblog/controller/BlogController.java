@@ -52,21 +52,21 @@ public class BlogController {
     public String blogMain(
         @PathVariable("id") String id,
         @RequestParam(
-            value = "category-no", required = true, defaultValue = "")
+            value = "category_no", required = true, defaultValue = "-1")
             Long categoryNo,
         @RequestParam(
-            value = "post-no", required = true, defaultValue = "")
+            value = "post_no", required = true, defaultValue = "-1")
             Long postNo,
         Model model) {
 //        Map<String, Object> map = new HashMap<String, Object>();
 //        map.put("categoryList", categoryService.getListByID(id));
 //        map.put("postList", postService.getListByCategoyNo(categoryNo));
         PostVo postVo = null;
-        if (("".equals(postNo) || postNo == null) && categoryNo == null) {
+        if (postNo == -1 && categoryNo == -1) {
             postVo = postService.getPostRecent(id);
             model.addAttribute("postVo", postVo);
         }
-        else if ("".equals(postNo) || postNo == null) {
+        else if (postNo == -1){
             model.addAttribute("postVo",
                 postService.mainPostByCategoryNo(categoryNo));
         }
@@ -75,7 +75,7 @@ public class BlogController {
                 postService.mainPostByPostNo(postNo));
         }
 
-        if ("".equals(categoryNo) || categoryNo == null) {
+        if (categoryNo == -1) {
             if (postVo != null) {
                 model.addAttribute("postList",
                     postService.getListByCategoyNo(postVo.getCategoryNo()));
@@ -95,7 +95,7 @@ public class BlogController {
         return "blog/blog-main";
     }
 
-    @RequestMapping("{id}/changeSettings")
+    @RequestMapping("/{id}/changeSettings")
     public String changeSettings(
         @PathVariable("id") String id,
         @RequestParam("blog-name") String blogName,
@@ -122,4 +122,5 @@ public class BlogController {
         blogService.changeSettings(id, blogName, img);
         return "redirect:/" + id + "/blog-main";
     }
+
 }

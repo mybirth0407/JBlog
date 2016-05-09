@@ -36,7 +36,11 @@ public class PostService {
         return postDao.getByPostNo(postNo);
     }
 
-    public PostVo getPostByNo(Long postNo) {
+    public PostVo getPostByPostNo(Long postNo) {
         return postDao.getByPostNo(postNo);
+    }
+
+    public void deleteByPostNo(Long postNo) {
+        postDao.deletePostByPostNo(postNo);
     }
 }
