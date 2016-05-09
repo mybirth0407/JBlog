@@ -8,10 +8,13 @@ import jblog.vo.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -58,9 +61,6 @@ public class BlogController {
             value = "post_no", required = true, defaultValue = "-1")
             Long postNo,
         Model model) {
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("categoryList", categoryService.getListByID(id));
-//        map.put("postList", postService.getListByCategoyNo(categoryNo));
         PostVo postVo = null;
         if (postNo == -1 && categoryNo == -1) {
             postVo = postService.getPostRecent(id);
@@ -80,18 +80,13 @@ public class BlogController {
                 model.addAttribute("postList",
                     postService.getListByCategoyNo(postVo.getCategoryNo()));
             }
-            else {
-
-            }
         }
         else {
             model.addAttribute(
                 "postList", postService.getListByCategoyNo(categoryNo));
         }
-
         model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
-//        System.out.println(categoryNo + " " + postNo);
         return "blog/blog-main";
     }
 
@@ -100,7 +95,8 @@ public class BlogController {
         @PathVariable("id") String id,
         @RequestParam("blog-name") String blogName,
         @RequestParam("logo-file") MultipartFile logoImg,
-        @RequestParam(value = "default-image", defaultValue = "false")
+        @RequestParam(
+            value = "default-image", required = true, defaultValue = "false")
             Boolean isIMGDefaultTrue,
         Model model) {
         String img = null;
@@ -123,4 +119,30 @@ public class BlogController {
         return "redirect:/" + id + "/blog-main";
     }
 
+    @RequestMapping(value = "/logo", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> logoupload(
+        MultipartHttpServletRequest multipartHttpServletRequest) {
+        Iterator<String> iterator =
+            multipartHttpServletRequest.getFileNames();
+        String filename = null;
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (iterator.hasNext()) {
+            MultipartFile multipartFile =
+                multipartHttpServletRequest.getFile(iterator.next());
+            filename = blogService.uploadIMG(multipartFile);
+            map.put("result", "success");
+            map.put("data", filename);
+        }
+        return map;
+    }
+
+    @RequestMapping("/{id}/changeDefault")
+    public String changeSettings(
+        @PathVariable("id") String id,
+        Model model) {
+        blogService.changeSettings(
+            id, Config.DEFAULT_BLOGNAME, Config.DEFAULT_IMG);
+        return "redirect:/" + id + "/blog-admin-basic";
+    }
 }

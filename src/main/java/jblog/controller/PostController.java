@@ -45,11 +45,11 @@ public class PostController {
         @PathVariable("id") String id,
         @RequestParam("category_no") Long categoryNo,
         @RequestParam("post_no") Long postNo) {
-        if (categoryNo == null) {
-            return "redirect:/" + id + "/blog-main";
+        if (categoryNo != null) {
+            postService.deleteByPostNo(postNo);
+            categoryService.updatePosting(categoryNo, -1L);
         }
-        postService.deleteByPostNo(postNo);
-        categoryService.updatePosting(categoryNo, -1L);
-        return "redirect:/" + id + "/blog-main?category_no=" + categoryNo;
+        return "redirect:/" + id + "/blog-main";
+//        return "redirect:/" + id + "/blog-main?category_no=" + categoryNo;
     }
 }

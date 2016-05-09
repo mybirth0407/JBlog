@@ -11,7 +11,22 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>JBlog</title>
   <link rel="stylesheet"
-        href="${pageContext.request.contextPath}/assets/css/jblog.css">
+        href="${
+        pageContext.request.contextPath}/assets/css/jblog.css">
+  <link rel="stylesheet"
+        href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script type="text/javascript"
+          src="${
+          pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js">
+  </script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $(document).on("", "", function(event) {
+
+      });
+    });
+  </script>
 </head>
 <body>
 <div id="container">
@@ -29,7 +44,7 @@
         </tr>
         <c:set var="i" value="0"/>
         <c:forEach items="${categoryList}" var="categoryVo">
-          <tr>
+          <tr id="tr-${categoryVo.no}">
             <td>${i = i + 1}</td>
             <td>${categoryVo.categoryName}</td>
             <td>${categoryVo.posting}</td>
@@ -48,7 +63,8 @@
       <h4 class="n-c">새로운 카테고리 추가</h4>
       <form id="category-insert" method="post"
             action="${
-            pageContext.request.contextPath}/${authUser.id}/category-insert">
+            pageContext.request.contextPath}/${
+            authUser.id}/category-insert">
         <table id="admin-cat-add">
           <tr>
           <td class="t">카테고리명</td>

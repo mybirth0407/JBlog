@@ -1,5 +1,6 @@
 package jblog.service;
 
+import jblog.config.Config;
 import jblog.dao.BlogDao;
 import jblog.vo.BlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,22 @@ public class BlogService {
 
     public void changeSettings(String id, String blogName, String img) {
         blogDao.updateSettings(id, blogName, img);
+    }
+
+    public String uploadIMG(MultipartFile multipartFile) {
+        if (multipartFile.isEmpty() == false) {
+            String fileOriginalName = multipartFile.getOriginalFilename();
+            String extName = fileOriginalName.substring(
+                fileOriginalName.lastIndexOf(".") + 1,
+                fileOriginalName.length());
+            String saveFileName = generateFileName(extName);
+
+            uploadFile(multipartFile, Config.FILE_SAVE_PATH, saveFileName);
+
+            String imageUrl = "/jblog/product-images/" + saveFileName;
+            return imageUrl;
+        }
+        return "";
+
     }
 }
