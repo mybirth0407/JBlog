@@ -18,7 +18,7 @@ public class BlogService {
         return blogDao.insertBlog(blogVo);
     }
 
-    public BlogVo getByID(String id) {
+    public BlogVo getBlogVoByID(String id) {
         return blogDao.getBlogVoByID(id);
     }
 

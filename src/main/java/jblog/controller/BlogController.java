@@ -4,7 +4,6 @@ import jblog.config.Config;
 import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.PostService;
-import jblog.vo.CategoryVo;
 import jblog.vo.PostVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -30,7 +26,7 @@ public class BlogController {
     public String blogAdminBasic(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getByID(id));
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         return "blog/blog-admin-basic";
     }
 
@@ -38,7 +34,7 @@ public class BlogController {
     public String blogAdminCategroy(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getByID(id));
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
         return "blog/blog-admin-category";
     }
@@ -47,7 +43,7 @@ public class BlogController {
     public String blogAdminWrite(
         @PathVariable("id") String id,
         Model model) {
-        model.addAttribute("blogVo", blogService.getByID(id));
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
         return "blog/blog-admin-write";
     }
@@ -65,10 +61,9 @@ public class BlogController {
 //        Map<String, Object> map = new HashMap<String, Object>();
 //        map.put("categoryList", categoryService.getListByID(id));
 //        map.put("postList", postService.getListByCategoyNo(categoryNo));
-        System.out.println(categoryNo + " " + postNo);
         PostVo postVo = null;
         if (("".equals(postNo) || postNo == null) && categoryNo == null) {
-            postVo = postService.getRecent(id);
+            postVo = postService.getPostRecent(id);
             model.addAttribute("postVo", postVo);
         }
         else if ("".equals(postNo) || postNo == null) {
@@ -94,7 +89,7 @@ public class BlogController {
                 "postList", postService.getListByCategoyNo(categoryNo));
         }
 
-        model.addAttribute("blogVo", blogService.getByID(id));
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
 //        System.out.println(categoryNo + " " + postNo);
         return "blog/blog-main";
@@ -105,10 +100,15 @@ public class BlogController {
         @PathVariable("id") String id,
         @RequestParam("blog-name") String blogName,
         @RequestParam("logo-file") MultipartFile logoImg,
+        @RequestParam(value = "default-image", defaultValue = "false")
+            Boolean isIMGDefaultTrue,
         Model model) {
         String img = null;
-        model.addAttribute("blogVo", blogService.getByID(id));
-        if (logoImg.isEmpty() == false) {
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
+        if (isIMGDefaultTrue == true) {
+            img = Config.DEFAULT_IMG;
+        }
+        else if (logoImg.isEmpty() == false) {
             String originFileName = logoImg.getOriginalFilename();
             String extName = originFileName.substring(
                 originFileName.lastIndexOf(".") + 1,

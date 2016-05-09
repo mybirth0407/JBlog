@@ -26,10 +26,11 @@
             <td class="t">제목</td>
             <td>
               <input type="text" size="60" name="title" value="">
-              <select name="categoryName">
+              <select name="categoryNo">
                 <%--<option>선택하세요</option>--%>
                 <c:forEach items="${categoryList}" var="categoryVo">
-                  <option>${categoryVo.categoryName}</option>
+                  <option value="${categoryVo.no}">
+                    ${categoryVo.categoryName}</option>
                 </c:forEach>
               </select>
             </td>

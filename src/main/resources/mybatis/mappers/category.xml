@@ -48,4 +48,14 @@
     ]]>
   </update>
 
+  <select id="getByCategoryName"
+          parameterType="string"
+          resultType="categoryvo">
+    <![CDATA[
+      select no, blog_no as blogNo, category_name as categoryName,
+        description, posting
+      from category
+      where #{no} = no;
+    ]]>
+  </select>
 </mapper>

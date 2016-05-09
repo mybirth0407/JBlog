@@ -27,7 +27,7 @@
             <c:set value="${postVo.categoryNo}" var="categoryNo"/>
             <a href="${
             pageContext.request.contextPath}/${
-            authUser.id}/blog-main?category-no=${
+            blogVo.userID}/blog-main?category-no=${
             categoryNo}&post-no=${postVo.no}">${
             postVo.title}</a> <span>${
             postVo.regDate}</span>
@@ -51,7 +51,7 @@
         <li>
           <a href="${
           pageContext.request.contextPath}/${
-          authUser.id}/blog-main?category-no=${categoryVo.no}">${
+          blogVo.userID}/blog-main?category-no=${categoryVo.no}">${
           categoryVo.categoryName}</a>
         </li>
       </c:forEach>

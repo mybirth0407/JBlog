@@ -37,12 +37,8 @@
           <tr>
             <td class="t">&nbsp;</td>
             <td>
-              <%--TODO value 값 변경해서 기본 이미지로 변경하기--%>
-              <button type="file"
-                      name="default-logo-file"
-                      value=${Config.DEFAULT_IMG}>
+              <input type="checkbox" name="default-image" value="true"/>
                 기본 사진으로 변경
-              </button>
               <input type="file" name="logo-file"/></td>
           </tr>
           <tr>

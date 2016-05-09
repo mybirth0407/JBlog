@@ -22,21 +22,20 @@ public class PostController {
 
     @RequestMapping("/{id}/post-write")
     public String postWrite(
-        @ModelAttribute PostVo postVo, @PathVariable("id") String id,
-        String categoryName) {
-        Long no = categoryService.getByCategoryName(categoryName).getNo();
-        postVo.setCategoryNo(no);
+        @ModelAttribute PostVo postVo, @PathVariable("id") String id) {
         postService.write(postVo);
-        categoryService.updatePosting(no);
-
-        return "redirect:/" + id + "/writesuccess";
+        System.out.println(postVo);
+        categoryService.updatePosting(postVo.getCategoryNo());
+        return "redirect:/" + id + "/writesuccess/" + postVo.getNo();
     }
 
-    @RequestMapping("{id}/writesuccess")
+    @RequestMapping("/{id}/writesuccess/{postNo}")
     public String writeSuccess(
         @PathVariable("id") String id,
+        @PathVariable("postNo") Long postNo,
         Model model) {
-        model.addAttribute("blogVo", blogService.getByID(id));
+        model.addAttribute("postVo", postService.getPostByNo(postNo));
+        model.addAttribute("blogVo", blogService.getBlogVoByID(id));
         return "blog/blog-admin-writesuccess";
     }
 }

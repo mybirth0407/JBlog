@@ -11,7 +11,6 @@ import java.util.List;
 public class PostDao {
     @Autowired
     private SqlSession sqlSession;
-    private PostVo byRecent;
 
     public PostVo insertPost(PostVo postVo) {
         if (sqlSession.insert("post.write", postVo) == 0) {
@@ -25,12 +24,11 @@ public class PostDao {
     }
 
     public PostVo getRecentByCategoryNo(Long categoryNo) {
-        System.out.println(categoryNo);
         return sqlSession.selectOne(
             "post.getRecentByCategoryNo", categoryNo);
     }
 
-    public List<PostVo> getCategoryListByCategoryNo(Long categoryNo) {
+    public List<PostVo> getPostListByCategoryNo(Long categoryNo) {
         return sqlSession.selectList("post.getListByCategoryNo", categoryNo);
     }
 

@@ -24,8 +24,13 @@ public class CategoryController {
     public Map<String, Object> categoryDelete(
         @PathVariable("no") Long no) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("result", "success");
-        map.put("data", categoryService.remove(no));
+        if (categoryService.getByNo(no).getPosting() > 0) {
+            map.put("result", "false");
+        }
+        else {
+            map.put("result", "success");
+            map.put("data", categoryService.remove(no));
+        }
         return map;
     }
 
@@ -35,7 +40,7 @@ public class CategoryController {
         @ModelAttribute CategoryVo categoryVo,
         @PathVariable("id") String id,
         Model model) {
-        BlogVo blogVo = blogService.getByID(id);
+        BlogVo blogVo = blogService.getBlogVoByID(id);
         categoryVo.setBlogNo(blogVo.getNo());
         categoryVo.setPosting(0L);
         model.addAttribute("blogVo", blogVo);

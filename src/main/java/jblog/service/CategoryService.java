@@ -25,10 +25,14 @@ public class CategoryService {
     }
 
     public CategoryVo getByCategoryName(String categoryName) {
-        return categoryDao.getCategoryVoByCategoryName(categoryName);
+        return categoryDao.getCategoryByCategoryName(categoryName);
     }
 
     public void updatePosting(Long no) {
         categoryDao.update(no);
+    }
+
+    public CategoryVo getByNo(Long no) {
+        return categoryDao.getCategoryByCategoryNo(no);
     }
 }

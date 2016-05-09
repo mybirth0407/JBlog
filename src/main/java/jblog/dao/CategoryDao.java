@@ -31,20 +31,23 @@ public class CategoryDao {
     
     public boolean delete(Long no) {
         boolean success = true;
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("no", no);
-        if (sqlSession.delete("category.deleteByNo", map) == 0) {
+        if (sqlSession.delete("category.deleteByNo", no) == 0) {
             success = false;
         }
         return success;
     }
 
-    public CategoryVo getCategoryVoByCategoryName(String categoryName) {
+    public CategoryVo getCategoryByCategoryName(String categoryName) {
         return sqlSession.selectOne(
             "category.getByCategoryName", categoryName);
     }
 
     public void update(Long no) {
         sqlSession.update("category.updatePosting", no);
+    }
+
+    public CategoryVo getCategoryByCategoryNo(Long no) {
+        return sqlSession.selectOne(
+            "category.getByCategoryNo", no);
     }
 }

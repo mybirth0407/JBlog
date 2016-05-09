@@ -51,6 +51,7 @@
     <property name="prefix" value="/WEB-INF/jblog/views/"/>
     <property name="suffix" value=".jsp"/>
     <property name="order" value="1"/>
+    <property name="contentType" value="text/html; charset=UTF-8"/>
   </bean>
 
   <bean id="multipartResolver"
