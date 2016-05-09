@@ -25,7 +25,6 @@ public class PostController {
     public String postWrite(
         @ModelAttribute PostVo postVo, @PathVariable("id") String id) {
         postService.write(postVo);
-        System.out.println(postVo);
         categoryService.updatePosting(postVo.getCategoryNo(), 1L);
         return "redirect:/" + id + "/writesuccess/" + postVo.getNo();
     }

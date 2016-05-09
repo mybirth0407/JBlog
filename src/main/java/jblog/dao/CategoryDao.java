@@ -45,7 +45,7 @@ public class CategoryDao {
 
     public void update(Long categoryNo, Long action) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("no", categoryNo);
+        map.put("categoryNo", categoryNo);
         map.put("action", action);
         System.out.println(action);
         sqlSession.update("category.updatePosting", map);

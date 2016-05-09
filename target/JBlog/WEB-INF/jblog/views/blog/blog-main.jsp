@@ -19,17 +19,23 @@
       <div class="blog-content">
         <c:choose>
         <c:when test="${
-        param.category_no eq '' || empty param.category_no}">
-        <strong><h1>최근 포스트</h1></strong>
+        param.category_no eq '' ||
+        empty param.category_no}">
+        <h1 style="color: red">최근 포스트</h1>
+        <c:if test="${empty postVo}">
+          <h1>최근 포스팅을 하지 않았습니다.</h1>
+        </c:if>
         <h2>${postVo.title}</h2>
         <p>${postVo.content}<p>
         </c:when>
         <c:otherwise>
-        <h1>${postVo.title}</h1>
+        <h2>${postVo.title}</h2>
         <p>${postVo.content}<p>
         </c:otherwise>
         </c:choose>
-        <c:if test="${authUser.id eq blogVo.userID}">
+        <c:if test="${
+        authUser.id eq blogVo.userID &&
+        not empty postVo}">
         <strong><a href="${
         pageContext.request.contextPath}/${
         authUser.id}/delete?category_no=${
@@ -38,17 +44,26 @@
         </c:if>
       </div>
       <ul class="blog-list">
-        <c:forEach items="${postList}" var="postVo">
-          <li>
-            <c:set value="${postVo.categoryNo}" var="categoryNo"/>
-            <a href="${
-            pageContext.request.contextPath}/${
-            blogVo.userID}/blog-main?category_no=${
-            categoryNo}&post_no=${postVo.no}">${
-              postVo.title}</a> <span>${
-            postVo.regDate}</span>
-          </li>
-        </c:forEach>
+        <c:choose>
+          <c:when test="${postList.size() eq 0}">
+            <h1 style="color: red">최근 포스트</h1>
+            <h1>최근 포스팅을 하지 않았습니다.</h1>
+          </c:when>
+          <c:otherwise>
+            <c:forEach items="${postList}" var="postVo">
+              <li>
+                <c:set value="${postVo.categoryNo}" var="categoryNo"/>
+                <a href="${
+                pageContext.request.contextPath}/${
+                blogVo.userID}/blog-main?category_no=${
+                categoryNo}&post_no=${postVo.no}">${
+                postVo.title}</a> <span>${
+                postVo.regDate}</span>
+              </li>
+            </c:forEach>
+          </c:otherwise>
+        </c:choose>
+
       </ul>
     </div>
   </div>
