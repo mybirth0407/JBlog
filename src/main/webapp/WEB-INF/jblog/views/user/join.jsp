@@ -26,13 +26,14 @@
           return false;
         }
 
-        /* 이메일 체크 */
+        /* 아이디 체크 */
         if ($("#blog-id").val() == "") {
           alert("아이디는 필수 요소다!");
           $("#blog-id").focus();
           return false;
         }
 
+        /* 아이디 중복 체크 */
         if ($("#img-checkID").is(":visible") == false) {
           alert("아이디는 중복 체크를 하렴");
           return false;

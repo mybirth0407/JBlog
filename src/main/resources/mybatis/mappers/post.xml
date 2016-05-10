@@ -8,6 +8,9 @@
       insert into post
       values(null, #{categoryNo}, #{title}, #{content}, now());
     ]]>
+    <selectKey keyProperty="no" resultType="long" order="AFTER">
+      select last_insert_id();
+    </selectKey>
   </insert>
 
   <select id="getListByCategoryNo" parameterType="long" resultType="postvo">
@@ -44,7 +47,7 @@
           and b.no = c.blog_no
           and c.no = p.category_no
       order by c.no desc
-      limit 1
+      limit 1;
     ]]>
   </select>
 

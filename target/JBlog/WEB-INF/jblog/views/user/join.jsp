@@ -26,31 +26,31 @@
           return false;
         }
 
-        /* 이메일 체크 */
+        /* 아이디 체크 */
         if ($("#blog-id").val() == "") {
           alert("아이디는 필수 요소다!");
           $("#blog-id").focus();
           return false;
         }
 
+        /* 아이디 중복 체크 */
         if ($("#img-checkID").is(":visible") == false) {
           alert("아이디는 중복 체크를 하렴");
           return false;
         }
 
+        /* 비밀번호 유효성 체크 */
         if ($("#passwd").val() == "") {
           alert("비밀번호는 필수 요소다!");
           return false;
         }
 
+        /* 약관 체크, 제이쿼리 isChecked */
         if ($("#agree-prov").is(":checked") == false) {
           alert("약관 동의해라");
           return false;
         }
 
-        /* 패스워드 유효성 체크 */
-        /* 약관 체크, 제이쿼리 isChecked */
-        alert("제출하셈! 빰");
         return true;
       });
 
@@ -66,7 +66,8 @@
         }
         console.log(id);
         $.ajax({
-          url: "${pageContext.request.contextPath}/checkID?blog-id=" + id,
+          url: "${pageContext.request.contextPath}/checkID?" +
+            "blog-id=" + id,
           type: "get", // 통신방식 get/post 둘중 하나
           dataType: "json", // 수신 데이터 타입
           data: "", //post방식인 경우 서버에 전달할 파라미터 데이터

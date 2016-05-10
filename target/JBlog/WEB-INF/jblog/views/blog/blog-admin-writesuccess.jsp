@@ -20,7 +20,8 @@
       <div class="center-content">
         <p class="welcome-message">
           <span> 감사합니다. 글이 성공적으로 작성되었습니다.</span>
-          <a href="${
+          <br>
+          <a style="padding-top:50px;padding-left:250px;" href="${
           pageContext.request.contextPath}/${
           authUser.id}/blog-main?category_no=${
           postVo.categoryNo}&post_no=${

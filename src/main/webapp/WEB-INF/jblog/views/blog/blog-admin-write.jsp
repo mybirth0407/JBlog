@@ -30,7 +30,7 @@
                 <%--<option>선택하세요</option>--%>
                 <c:forEach items="${categoryList}" var="categoryVo">
                   <option value="${categoryVo.no}">
-                    ${categoryVo.categoryName}</option>
+                      ${categoryVo.categoryName}</option>
                 </c:forEach>
               </select>
             </td>

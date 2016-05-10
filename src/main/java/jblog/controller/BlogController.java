@@ -10,11 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -119,23 +114,23 @@ public class BlogController {
         return "redirect:/" + id + "/blog-main";
     }
 
-    @RequestMapping(value = "/logo", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> logoupload(
-        MultipartHttpServletRequest multipartHttpServletRequest) {
-        Iterator<String> iterator =
-            multipartHttpServletRequest.getFileNames();
-        String filename = null;
-        Map<String, Object> map = new HashMap<String, Object>();
-        if (iterator.hasNext()) {
-            MultipartFile multipartFile =
-                multipartHttpServletRequest.getFile(iterator.next());
-            filename = blogService.uploadIMG(multipartFile);
-            map.put("result", "success");
-            map.put("data", filename);
-        }
-        return map;
-    }
+//    @RequestMapping(value = "/logo", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Map<String, Object> logoupload(
+//        MultipartHttpServletRequest multipartHttpServletRequest) {
+//        Iterator<String> iterator =
+//            multipartHttpServletRequest.getFileNames();
+//        String filename = null;
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        if (iterator.hasNext()) {
+//            MultipartFile multipartFile =
+//                multipartHttpServletRequest.getFile(iterator.next());
+//            filename = blogService.uploadIMG(multipartFile);
+//            map.put("result", "success");
+//            map.put("data", filename);
+//        }
+//        return map;
+//    }
 
     @RequestMapping("/{id}/changeDefault")
     public String changeSettings(

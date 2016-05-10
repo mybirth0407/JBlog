@@ -69,20 +69,19 @@ public class BlogService {
         blogDao.updateSettings(id, blogName, img);
     }
 
-    public String uploadIMG(MultipartFile multipartFile) {
-        if (multipartFile.isEmpty() == false) {
-            String fileOriginalName = multipartFile.getOriginalFilename();
-            String extName = fileOriginalName.substring(
-                fileOriginalName.lastIndexOf(".") + 1,
-                fileOriginalName.length());
-            String saveFileName = generateFileName(extName);
-
-            uploadFile(multipartFile, Config.FILE_SAVE_PATH, saveFileName);
-
-            String imageUrl = "/jblog/product-images/" + saveFileName;
-            return imageUrl;
-        }
-        return "";
-
-    }
+//    public String uploadIMG(MultipartFile multipartFile) {
+//        if (multipartFile.isEmpty() == false) {
+//            String fileOriginalName = multipartFile.getOriginalFilename();
+//            String extName = fileOriginalName.substring(
+//                fileOriginalName.lastIndexOf(".") + 1,
+//                fileOriginalName.length());
+//            String saveFileName = generateFileName(extName);
+//
+//            uploadFile(multipartFile, Config.FILE_SAVE_PATH, saveFileName);
+//
+//            String imageUrl = "/jblog/product-images/" + saveFileName;
+//            return imageUrl;
+//        }
+//        return "";
+//    }
 }
