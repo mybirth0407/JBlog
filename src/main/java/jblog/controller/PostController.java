@@ -4,6 +4,8 @@ import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.PostService;
 import jblog.vo.PostVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,21 +23,25 @@ public class PostController {
     @Autowired
     CategoryService categoryService;
 
+    private static final Log LOG = LogFactory.getLog(BlogController.class);
+
     @RequestMapping("/{id}/post-write")
     public String postWrite(
         @ModelAttribute PostVo postVo, @PathVariable("id") String id) {
         postService.write(postVo);
         categoryService.updatePosting(postVo.getCategoryNo(), 1L);
+        LOG.debug("post write debug-level");
         return "redirect:/" + id + "/writesuccess/" + postVo.getNo();
     }
 
     @RequestMapping("/{id}/writesuccess/{postNo}")
-    public String writeSuccess(
+    public String postWriteSuccess(
         @PathVariable("id") String id,
         @PathVariable("postNo") Long postNo,
         Model model) {
         model.addAttribute("postVo", postService.getPostByPostNo(postNo));
         model.addAttribute("blogVo", blogService.getBlogByID(id));
+        LOG.debug("post write success debug-level");
         return "blog/blog-admin-writesuccess";
     }
 
@@ -49,6 +55,7 @@ public class PostController {
             postService.deleteByPostNo(postNo);
             categoryService.updatePosting(categoryNo, -1L);
         }
+        LOG.debug("post delete debug-level");
         return "redirect:/" + id + "/blog-main";
 //        return "redirect:/" + id + "/blog-main?category_no=" + categoryNo;
     }

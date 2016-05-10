@@ -16,7 +16,7 @@
     pageContext.request.contextPath}/logout">로그아웃</a></li>
   <li><a href="${
     pageContext.request.contextPath}/${
-    authUser.id}/blog-main?category_no&post_no">내블로그
+    authUser.id}/blog-main">내블로그
     </c:otherwise>
     </c:choose>
   </a></li>

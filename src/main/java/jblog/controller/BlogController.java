@@ -5,6 +5,8 @@ import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.service.PostService;
 import jblog.vo.PostVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +22,14 @@ public class BlogController {
     @Autowired
     PostService postService;
 
+    private static final Log LOG = LogFactory.getLog(BlogController.class);
+
     @RequestMapping("/{id}/blog-admin-basic")
     public String blogAdminBasic(
         @PathVariable("id") String id,
         Model model) {
         model.addAttribute("blogVo", blogService.getBlogByID(id));
+        LOG.debug("blog admin basic debug-level");
         return "blog/blog-admin-basic";
     }
 
@@ -34,6 +39,7 @@ public class BlogController {
         Model model) {
         model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
+        LOG.debug("blog admin category debug-level");
         return "blog/blog-admin-category";
     }
 
@@ -43,6 +49,7 @@ public class BlogController {
         Model model) {
         model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
+        LOG.debug("blog admin write debug-level");
         return "blog/blog-admin-write";
     }
 
@@ -82,6 +89,7 @@ public class BlogController {
         }
         model.addAttribute("blogVo", blogService.getBlogByID(id));
         model.addAttribute("categoryList", categoryService.getListByID(id));
+        LOG.debug("blog main debug-level");
         return "blog/blog-main";
     }
 
@@ -111,6 +119,7 @@ public class BlogController {
             img = "/jblog/product-images/" + saveFileName;
         }
         blogService.changeSettings(id, blogName, img);
+        LOG.debug("change settings debug-level");
         return "redirect:/" + id + "/blog-main";
     }
 
@@ -134,10 +143,10 @@ public class BlogController {
 
     @RequestMapping("/{id}/changeDefault")
     public String changeSettings(
-        @PathVariable("id") String id,
-        Model model) {
+        @PathVariable("id") String id) {
         blogService.changeSettings(
             id, Config.DEFAULT_BLOGNAME, Config.DEFAULT_IMG);
+        LOG.debug("change default debug-level");
         return "redirect:/" + id + "/blog-admin-basic";
     }
 }

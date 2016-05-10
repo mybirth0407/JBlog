@@ -3,7 +3,7 @@
          pageEncoding="utf-8" %>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <title>JBlog</title>
   <Link rel="stylesheet"
         href="${pageContext.request.contextPath}/assets/css/jblog.css"/>

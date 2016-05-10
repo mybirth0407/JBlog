@@ -10,8 +10,7 @@
     <c:choose>
       <c:when test="${empty authUser}">
         <li><a href="${
-          pageContext.request.contextPath}/${
-          authUser.id}/login">로그인</a></li>
+          pageContext.request.contextPath}/loginform">로그인</a></li>
         <li><a href="${
           pageContext.request.contextPath}/joinform">회원가입</a></li>
       </c:when>

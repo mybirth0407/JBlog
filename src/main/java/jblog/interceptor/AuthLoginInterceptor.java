@@ -19,6 +19,8 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
         throws Exception {
         String id = req.getParameter("id");
         String passwd = req.getParameter("passwd");
+        String referer = req.getParameter("redirectURL");
+        System.out.println(referer);
         UserVo userVo = new UserVo(id, passwd);
 
         UserVo authUser = userService.login(userVo);
@@ -28,7 +30,8 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
         else {
             HttpSession httpSession = req.getSession(true);
             httpSession.setAttribute("authUser", authUser);
-            res.sendRedirect(req.getContextPath() + "/main");
+            res.sendRedirect(referer);
+//            res.sendRedirect(req.getContextPath() + "/main");
         }
         return false;
     }

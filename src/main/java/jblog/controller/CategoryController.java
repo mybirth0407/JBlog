@@ -4,6 +4,8 @@ import jblog.service.BlogService;
 import jblog.service.CategoryService;
 import jblog.vo.BlogVo;
 import jblog.vo.CategoryVo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ public class CategoryController {
     @Autowired
     BlogService blogService;
 
+    private static final Log LOG = LogFactory.getLog(BlogController.class);
+
     @RequestMapping("/category-delete")
     @ResponseBody
     public Map<String, Object> categoryDelete(
@@ -32,6 +36,7 @@ public class CategoryController {
             map.put("result", "success");
             map.put("data", categoryService.remove(categoryNo));
         }
+        LOG.debug("category delete debug-level");
         return map;
     }
 
@@ -50,6 +55,7 @@ public class CategoryController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("result", "success");
         map.put("data", categoryService.add(categoryVo));
+        LOG.debug("category insert debug-level");
         return map;
     }
 
@@ -60,8 +66,7 @@ public class CategoryController {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("result", "success");
         map.put("data", categoryService.getListByID(id));
+        LOG.debug("category list debug-level");
         return map;
     }
-
-
 }
