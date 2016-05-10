@@ -1,5 +1,6 @@
 package jblog.controller;
 
+import jblog.annotation.Auth;
 import jblog.config.Config;
 import jblog.service.BlogService;
 import jblog.service.CategoryService;
@@ -24,6 +25,7 @@ public class BlogController {
 
     private static final Log LOG = LogFactory.getLog(BlogController.class);
 
+    @Auth
     @RequestMapping("/{id}/blog-admin-basic")
     public String blogAdminBasic(
         @PathVariable("id") String id,
@@ -33,6 +35,7 @@ public class BlogController {
         return "blog/blog-admin-basic";
     }
 
+    @Auth
     @RequestMapping("/{id}/blog-admin-category")
     public String blogAdminCategroy(
         @PathVariable("id") String id,
@@ -43,6 +46,7 @@ public class BlogController {
         return "blog/blog-admin-category";
     }
 
+    @Auth
     @RequestMapping("/{id}/blog-admin-write")
     public String blogAdminWrite(
         @PathVariable("id") String id,
@@ -93,6 +97,7 @@ public class BlogController {
         return "blog/blog-main";
     }
 
+    @Auth
     @RequestMapping("/{id}/changeSettings")
     public String changeSettings(
         @PathVariable("id") String id,
@@ -140,7 +145,7 @@ public class BlogController {
 //        }
 //        return map;
 //    }
-
+    @Auth
     @RequestMapping("/{id}/changeDefault")
     public String changeSettings(
         @PathVariable("id") String id) {
