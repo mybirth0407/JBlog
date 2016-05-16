@@ -48,7 +48,6 @@
     <orderEntry type="library" exported="" name="javax.servlet.jsp.jstl-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="javax.servlet.jsp.jstl-api-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="mariadb-java-client-1.3.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.0.M1" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="json-lib-2.2.2-jdk15" level="project" />
     <orderEntry type="library" exported="" name="ezmorph-1.0.6" level="project" />
     <orderEntry type="library" exported="" name="commons-logging-1.2" level="project" />
@@ -87,5 +86,6 @@
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.0.M4" level="application_server_libraries" />
   </component>
 </module>

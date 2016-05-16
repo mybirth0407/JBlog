@@ -1,6 +1,5 @@
 package jblog.dao;
 
-import jblog.config.Config;
 import jblog.vo.BlogVo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
