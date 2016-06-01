@@ -11,7 +11,7 @@ public class MainController {
 
     @RequestMapping("/main")
     public String index() {
-        LOG.debug("main debug-level");
+//        LOG.debug("main debug-level");
         return "main/index";
     }
 }

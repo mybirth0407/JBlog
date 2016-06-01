@@ -6,15 +6,16 @@
              http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
   <classpath>
-    <dir name="C:/Users/Yedarm Seong/SugarSync/BIT/out/production/JBlog">
+    <dir name="D:/BIT/out/production/JBlog">
     </dir>
   </classpath>
 
   <web>
     <link target="/">
-      <dir name="C:/Users/Yedarm Seong/SugarSync/BIT/JBlog/src/main/webapp">
+      <dir name="D:/BIT/JBlog/src/main/webapp">
       </dir>
     </link>
   </web>
-
 </application>
+
+
